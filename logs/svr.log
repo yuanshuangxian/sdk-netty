@@ -1,0 +1,33 @@
+
+2019-09-01 21:00:28,626 DEBUG [org.apache.commons.configuration.ConfigurationUtils.locate(ConfigurationUtils.java:402)] ConfigurationUtils.locate(): base is null, name is E:\EclipseWorkSpace\sdk/netty.properties
+ 
+2019-09-01 21:00:28,658 DEBUG [io.netty.util.internal.logging.InternalLoggerFactory.newDefaultFactory(InternalLoggerFactory.java:43)] Using SLF4J as the default logging framework
+ 
+2019-09-01 21:00:28,667 DEBUG [io.netty.util.internal.CleanerJava6.<clinit>(CleanerJava6.java:92)] java.nio.ByteBuffer.cleaner(): available
+ 
+2019-09-01 21:00:28,699 DEBUG [io.netty.util.internal.InternalThreadLocalMap.<clinit>(InternalThreadLocalMap.java:54)] -Dio.netty.threadLocalMap.stringBuilder.initialSize: 1024
+ 
+2019-09-01 21:00:28,699 DEBUG [io.netty.util.internal.InternalThreadLocalMap.<clinit>(InternalThreadLocalMap.java:57)] -Dio.netty.threadLocalMap.stringBuilder.maxSize: 4096
+ 
+2019-09-01 21:00:29,291 DEBUG [io.netty.util.ResourceLeakDetector.<clinit>(ResourceLeakDetector.java:129)] -Dio.netty.leakDetection.level: simple
+ 
+2019-09-01 21:00:29,291 DEBUG [io.netty.util.ResourceLeakDetector.<clinit>(ResourceLeakDetector.java:130)] -Dio.netty.leakDetection.targetRecords: 4
+ 
+2019-09-01 21:00:29,315 DEBUG [io.netty.channel.DefaultChannelId.<clinit>(DefaultChannelId.java:79)] -Dio.netty.processId: 18584 (auto-detected)
+ 
+2019-09-01 21:00:29,315 DEBUG [io.netty.util.NetUtil.<clinit>(NetUtil.java:139)] -Djava.net.preferIPv4Stack: false
+ 
+2019-09-01 21:00:29,315 DEBUG [io.netty.util.NetUtil.<clinit>(NetUtil.java:140)] -Djava.net.preferIPv6Addresses: false
+ 
+2019-09-01 21:00:29,758 DEBUG [io.netty.util.NetUtil.<clinit>(NetUtil.java:224)] Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
+ 
+2019-09-01 21:00:29,759 DEBUG [io.netty.util.NetUtil$1.run(NetUtil.java:289)] Failed to get SOMAXCONN from sysctl and file \proc\sys\net\core\somaxconn. Default: 200
+ 
+2019-09-01 21:00:30,278 DEBUG [io.netty.channel.DefaultChannelId.<clinit>(DefaultChannelId.java:101)] -Dio.netty.machineId: 50:e0:85:ff:fe:51:f4:19 (auto-detected)
+ 
+2019-09-01 21:00:30,304 WARN [io.netty.bootstrap.AbstractBootstrap.setChannelOption(AbstractBootstrap.java:446)] Unknown channel option 'SO_SNDBUF' for channel '[id: 0x03d18273]'
+ 
+2019-09-01 21:00:30,304 WARN [io.netty.bootstrap.AbstractBootstrap.setChannelOption(AbstractBootstrap.java:446)] Unknown channel option 'SO_KEEPALIVE' for channel '[id: 0x03d18273]'
+ 
+2019-09-01 21:00:30,304 WARN [io.netty.bootstrap.AbstractBootstrap.setChannelOption(AbstractBootstrap.java:446)] Unknown channel option 'TCP_NODELAY' for channel '[id: 0x03d18273]'
+ 

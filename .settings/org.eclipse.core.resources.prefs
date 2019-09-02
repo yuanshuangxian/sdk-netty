@@ -1,0 +1,11 @@
+eclipse.preferences.version=1
+encoding//src/main/java=UTF-8
+encoding//src/main/resources=UTF-8
+encoding//src/main/resources/log4j.properties=UTF-8
+encoding//src/main/resources/netty.properties=UTF-8
+encoding//src/main/resources/request.pool.properties=UTF-8
+encoding//src/test/java=UTF-8
+encoding/<project>=UTF-8
+encoding/log4j.properties=UTF-8
+encoding/netty.properties=UTF-8
+encoding/request.pool.properties=UTF-8

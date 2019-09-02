@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+	<jmxConfigurator />
+	<!-- 控制台输出日志 -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%n%d %thread %-5level [%logger\(%F.%M:%line\)] %msg%n
+			</pattern>
+		</layout>
+	</appender>
+	<!-- 文件输出日志 (文件大小策略进行文件输出，超过指定大小对文件备份) -->
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>DEBUG</level>
+		</filter>
+		<file>./logs/log.txt</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>./logs/%d{yyyy-MM}/%d{yyyy-MM-dd}/log-%d{yyyy-MM-dd}.%i.txt.gz</fileNamePattern>
+			<!-- each file should be at most 50MB, keep 7 days worth of history, but at most 60GB -->
+			<maxFileSize>50MB</maxFileSize>
+			<maxHistory>7</maxHistory>
+			<totalSizeCap>60GB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%n%d{yyyy-MM-dd HH:mm:ss.SSS} %thread %-5level [%logger] %msg%n</pattern>
+			<charset>UTF-8</charset>
+			<immediateFlush>false</immediateFlush>
+		</encoder>
+	</appender>
+	<appender name="WIRE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+		<file>./logs/wire.txt</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>./logs/%d{yyyy-MM}/%d{yyyy-MM-dd}/wire-%d{yyyy-MM-dd}.%i.txt.gz</fileNamePattern>
+			<!-- each file should be at most 50MB, keep 7 days worth of history, but at most 60GB -->
+			<maxFileSize>50MB</maxFileSize>
+			<maxHistory>7</maxHistory>
+			<totalSizeCap>10GB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%n%d{yyyy-MM-dd HH:mm:ss.SSS} %thread %-5level [%logger] %msg%n</pattern>
+			<charset>UTF-8</charset>
+			<immediateFlush>true</immediateFlush>
+		</encoder>
+	</appender>
+
+	<!--日志异步到数据库 -->
+	<appender name="MySQL-Pool" class="ch.qos.logback.classic.db.DBAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>
+		<connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+			<!--连接池 -->
+			<dataSource class="com.alibaba.druid.pool.DruidDataSource">
+				<driverClass>com.mysql.jdbc.Driver</driverClass>
+				<url>jdbc:mysql://127.0.0.1:3306/sdk_log</url>
+				<user>root</user>
+				<password>168168</password>
+
+				<!-- 配置初始化大小、最小、最大 -->
+				<initialSize>2</initialSize>
+				<minIdle>2</minIdle>
+				<maxActive>50</maxActive>
+
+				<!-- 配置获取连接等待超时的时间 -->
+				<maxWait>10000</maxWait>
+
+				<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+				<timeBetweenEvictionRunsMillis>60000</timeBetweenEvictionRunsMillis>
+
+				<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+				<minEvictableIdleTimeMillis>300000</minEvictableIdleTimeMillis>
+
+				<validationQuery>SELECT 'x'</validationQuery>
+				<testWhileIdle>true</testWhileIdle>
+				<testOnBorrow>false</testOnBorrow>
+				<testOnReturn>false</testOnReturn>
+
+				<!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+				<poolPreparedStatements>false</poolPreparedStatements>
+				<maxPoolPreparedStatementPerConnectionSize>20</maxPoolPreparedStatementPerConnectionSize>
+			</dataSource>
+		</connectionSource>
+	</appender>
+
+	<!--这里指定logger name 是为jmx设置日志级别做铺垫 -->
+	<logger name="org.apache" level="ERROR" additivity="false">
+		<appender-ref ref="WIRE" />
+	</logger>
+
+	<!--<logger name="org.apache.commons" level="INFO" /> -->
+	<logger name="org.redisson" level="INFO" />
+	<logger name="io.netty" level="ERROR" />
+	<logger name="com.fqserver" level="DEBUG" />
+
+	<root level="INFO">
+		<!-- <appender-ref ref="STDOUT" /> -->
+		<appender-ref ref="FILE" />
+		<!--这里指定是否写入数据库 <appender-ref ref="MySQL-Pool" /> -->
+	</root>
+</configuration>
