@@ -1,3 +1,10 @@
 基于Netty搭建的http服务器
+FullHttpServerHandler为netty http实现类，该类url路径经处理，使用对象池实例化继承于RequestHandler的业务处理类。
 
-StartServer.java为启动类
+所有接口实现类均继承于RequestHandler，RequestHandler处理基本的请求，响应数据，数据加密等功能。
+
+具体的接口实现类继承RequestHandler，并设置url路由，使用方法参考action包下示例IndexDo类
+
+InitServer加载url路由，初始化对象池
+
+StartServer为启动类
